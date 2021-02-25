@@ -7,7 +7,7 @@ public class Reader   {
 
     String filename;
 
-    ArrayList<Streat> streatList = new ArrayList<>();
+    Map<Streat,Integer>streatList = new HashMap<>();
 
     ArrayList<Cars> carList = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class Reader   {
 
   
 
-    public ArrayList<Streat> readStreats()
+    public Map<Streat,Integer> readStreats()
     {
 
         try{
@@ -41,7 +41,7 @@ public class Reader   {
                 streat.setStareatName(l2[2]);
                 streat.setDuration(Integer.parseInt(l2[3]));
                
-                streatList.add(streat);
+                streatList.put(streat,Integer.parseInt(l2[0]));
 
                 map.put(l2[2], streat.getDuration());
 
@@ -109,6 +109,37 @@ public class Reader   {
            return null;
         }
        
+
+    }
+
+    public Globaldata  readdata()
+    {
+
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+
+            String[] l1 = br.readLine().split(" ");
+
+            Globaldata data = new Globaldata();
+
+            data.setSimulation(Integer.parseInt(l1[0]));
+
+            data.setInsertions(Integer.parseInt(l1[1]));
+
+            data.setStreats(Integer.parseInt(l1[2]));
+
+            data.setCars(Integer.parseInt(l1[3]));
+
+            data.setPoints(Integer.parseInt(l1[4]));
+
+            return data;
+
+
+        }catch(Exception e)
+        {
+            return null;    
+        }
+     
 
     }
 
